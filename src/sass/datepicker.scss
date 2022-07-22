@@ -1,0 +1,285 @@
+@import "datepicker-config";
+
+/* -------------------------------------------------
+    Datepicker
+   ------------------------------------------------- */
+
+.datepickers-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  @media print {
+    display: none;
+  }
+}
+
+.datepicker {
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, .15);
+  box-sizing: content-box;
+  font-family: $datepickerFontFamily, sans-serif;
+  font-size: $datepickerFontSize;
+  color: map_get($datepickerTextColor, common);
+  width: $datepickerWidth;
+  min-height: $datepickerHeight;
+  position: absolute;
+  left: -100000px;
+  opacity: 0;
+  transition: opacity $datepickerTransitionSpeed $datepickerTransitionEase, transform $datepickerTransitionSpeed $datepickerTransitionEase, left 0s $datepickerTransitionSpeed;
+  z-index: $datepickerZIndex;
+
+  &.-from-top- {
+    transform: translateY(-$datepickerTransitionOffset);
+  }
+  &.-from-right- {
+    transform: translateX($datepickerTransitionOffset);
+  }
+  &.-from-bottom- {
+    transform: translateY($datepickerTransitionOffset);
+  }
+  &.-from-left- {
+    transform: translateX(-$datepickerTransitionOffset);
+  }
+
+
+  &.active {
+    opacity: 1;
+    transform: translate(0);
+    transition: opacity $datepickerTransitionSpeed $datepickerTransitionEase, transform $datepickerTransitionSpeed $datepickerTransitionEase, left 0s 0s;
+  }
+
+  & hr {
+    width: 30%;
+    border: 1px solid #e5e5e58c;
+  }
+
+  & .selectText {
+    text-align: center;
+    margin: 0 9px 22px;
+    font-size: 12px;
+    font-weight: normal;
+  }
+
+  &.fidensioYBG {
+    background-color: $fidensioColor;
+    & .datepicker--nav-action path {
+      stroke: #ffffff;
+    }
+    & .datepicker--nav {
+      color: #ffffff;
+    }
+    & .datepicker--pointer{
+      background-color: $fidensioColor;
+    }
+
+    & .selectText {
+      color: white;
+    }
+
+    & hr {
+      border: 1px solid #ffffff82;
+    }
+  }
+
+}
+
+.datepicker-inline {
+  .datepicker {
+    border-color: map-get($datepickerBorderColor, inline);
+    box-shadow: none;
+    position: static;
+    left: auto;
+    right: auto;
+    opacity: 1;
+    transform: none;
+  }
+
+  .datepicker--pointer {
+    display: none;
+  }
+}
+
+.datepicker--content {
+  box-sizing: content-box;
+  padding: $datepickerPadding;
+
+  .-only-timepicker- & {
+    display: none;
+  }
+}
+
+//  Pointer
+// -------------------------------------------------
+$pointerHalfSize: $datepickerPointerSize / 2 + 3;
+
+.datepicker--pointer {
+  position: absolute;
+  background: #fff;
+  width: $datepickerPointerSize;
+  height: $datepickerPointerSize;
+  z-index: -1;
+
+  //  Main axis
+  // -------------------------
+
+  .-top-left- &, .-top-center- &, .-top-right- & {
+    top: calc(100% - #{$pointerHalfSize});
+    transform: rotate(135deg);
+  }
+
+  .-right-top- &, .-right-center- &, .-right-bottom- & {
+    right: calc(100% - #{$pointerHalfSize});
+    transform: rotate(225deg);
+  }
+
+  .-bottom-left- &, .-bottom-center- &, .-bottom-right- & {
+    bottom: calc(100% - #{$pointerHalfSize});
+    transform: rotate(315deg);
+  }
+
+  .-left-top- &, .-left-center- &, .-left-bottom- & {
+    left: calc(100% - #{$pointerHalfSize});
+    transform: rotate(45deg);
+  }
+
+  //  Secondary axis
+  // -------------------------
+
+  .-top-left- &, .-bottom-left- & {
+    left: $datepickerPointerOffset + 11;
+  }
+  .-top-right- &, .-bottom-right- & {
+    right: $datepickerPointerOffset + 11;
+  }
+  .-top-center- &, .-bottom-center- & {
+    left: calc(50% - #{$datepickerPointerSize} / 2);
+  }
+
+  .-left-top- &, .-right-top- & {
+    top: $datepickerPointerOffset + 11;
+  }
+  .-left-bottom- &, .-right-bottom- & {
+    bottom: $datepickerPointerOffset + 11;
+  }
+  .-left-center- &, .-right-center- & {
+    top: calc(50% - #{$datepickerPointerSize} / 2);
+  }
+
+}
+
+//  Body
+// -------------------------------------------------
+
+.datepicker--body {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}
+
+.circCont {
+  display: none;
+}
+
+@media screen and (max-width: 425px) {
+  .datepicker {
+    font-size: 16px;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    top: 0 !important;
+    & .selectText {
+      font-size: 14px;
+    }
+    &.active{
+      left: 0 !important;
+    }
+    &.-from-top- {
+      transform: none;
+    }
+    &.-from-right- {
+      transform: none;
+    }
+    &.-from-bottom- {
+      transform: none;
+    }
+    &.-from-left- {
+      transform: none;
+    }
+    & .datepicker--pointer {
+      display: none;
+    }
+  }
+
+  .datepicker--nav-title {
+    font-size: 25px;
+  }
+  .datepicker--nav-action path {
+    stroke-width: 4px;
+  }
+  .datepicker--content {
+    transform: translateY(30%);
+  }
+
+  .circCont{
+    display:inline-block;
+    position: absolute;
+    bottom: 50px;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+  .fidensioYBG .circle{
+    background: $yearBG !important;
+  }
+  .circle{
+    width:55px;
+    height:55px;
+    background: $fidensioColor;
+    border: none;
+    border-radius: 50%;
+    position:relative;
+    cursor:pointer;
+    display:inline-block;
+    margin:10px 20px;
+    &:after{
+      width:24px;
+      height:4px;
+      background-color: white;
+      content:"";
+      left:50%;
+      top:50%;
+      margin-left:-12px;
+      margin-top:-2px;
+      position:absolute;
+      transform: rotate(-45deg);
+    }
+    &:before{
+      left:50%;
+      top:50%;
+      margin-left:-12px;
+      margin-top:-2px;
+      width:24px;
+      height:4px;
+      background-color: white;
+      content:"";
+      position:absolute;
+      transform: rotate(45deg);
+    }
+  }
+  .circle[data-animation="magnify"]:not(.magnify){
+    transition: 100ms ease-in-out;
+    &:hover{
+    transform: scale(0.9);
+    }
+  }
+  .circle.magnify{
+    transition: 200ms ease-in-out;
+    transform: scale(1.6);
+    opacity:0;
+  }
+}

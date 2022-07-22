@@ -1,0 +1,14 @@
+{
+  "name": "datepickertranslated",
+  "version": "1.0.0",
+  "description": "DatePicker based on t1m0n project (UX - UI improved)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "air-datepicker": "^2.2.3"
+  }
+}
